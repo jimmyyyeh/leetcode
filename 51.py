@@ -1,4 +1,13 @@
 class Solution:
+    """
+    以5x5為例, 因應題目規則, 每個row, 都只會有一個column被選中,
+    每個元素選完後, 下一排能選擇的條件都會變嚴苛,
+        a. abs斜率 == 1 (左斜下 or 右斜下)
+        b. 選過的column都不會再被選到
+    兩個條件時往回走:
+    1. 走到最後一row -> 移除最後一個元素, 往後退一個元素(因為同排可能還有其他元素可選)
+    2. 下一排沒有元素可選 -> 往後退一個元素
+    """
     @staticmethod
     def get_slope(element, n, slope_dict):
         if not element:
@@ -18,38 +27,51 @@ class Solution:
         slope_dict[tuple(element)] = slope_set
         return slope_set
 
+    def dfs(self, matrix, index, n, slope_dict, result, results):
+        if index == n:
+            # 走到最後一排
+            results.append(result.copy())
+            result.pop()
+            return
+
+        previous_column = set()  # 先前已經選過的column
+        slope = set()  # 先前所有選擇棋格的斜率連集
+        for row, str_ in enumerate(result):
+            column = str_.index('Q')
+            slope = slope | slope_dict.get((row, column), set()) if result else set()
+            previous_column.add(column)
+
+        next_ = matrix[index * n: (index + 1) * n]
+        next_ = [n for n in next_ if n not in slope and n[1] not in previous_column]
+        # 針對條件過濾
+
+        for current in next_:
+            row, column = current
+            result.append('.' * column + 'Q' + '.' * (n - column - 1))
+            previous_column.add(column)
+            self.dfs(matrix=matrix,
+                     index=index + 1,
+                     n=n,
+                     slope_dict=slope_dict,
+                     result=result,
+                     results=results)
+        if result:
+            result.pop()
+        return
+
     def solveNQueens(self, n: int) -> list[list[str]]:
         matrix = [(i, j) for i in range(n) for j in range(n)]
-        result = list()
-        results = list()
-        slope_list = list()  # 存放已走過點的斜率
         slope_dict = dict()  # 存放每個點上的斜線
-        blocked = list()
-        previous_column = set()
         for element in matrix[:-n]:
             self.get_slope(element=element, n=n, slope_dict=slope_dict)
 
-        while True:
-            row = len(result)
-            current = matrix[row * n: (row + 1) * n]
-            current = [c for c in current if c not in slope_list + blocked and c[1] not in previous_column]
-            if not current:
-                if row == 0:
-                    break
-                element = (len(result) - 1, result[-1].index('Q'))
-                result.pop()
-                previous_column.remove(element[1])
-                slope = slope_dict.get(tuple(element))
-                slope_list = slope_list[:-len(slope)] if slope else slope_list
-                blocked.append(element)
-                continue
-            element = current[0]
-            result.append('.' * (element[1]) + 'Q' + '.' * (n - element[1] - 1))
-            previous_column.add(element[1])
-            if len(result) == n:
-                results.append(result.copy())
-            else:
-                slope = slope_dict.get(tuple(element))
-                slope_list.extend(slope)
-                blocked = [u for u in blocked if u[0] <= element[0]]
+        index = 0
+        result = list()
+        results = list()
+        self.dfs(matrix=matrix,
+                 index=index,
+                 n=n,
+                 slope_dict=slope_dict,
+                 result=result,
+                 results=results)
         return results
