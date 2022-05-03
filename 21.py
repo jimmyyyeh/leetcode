@@ -23,7 +23,7 @@ class Solution:
         #     list2 = list2.next
         #
         # ans = ListNode(val=tmp[-1])
-        # for i in tmp[:-1][::-1]:
+        # for i in reversed(tmp[:-1]):
         #     ans = ListNode(val=i, next=ans)
         # return ans
         dummy = ListNode()
