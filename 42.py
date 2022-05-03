@@ -32,10 +32,12 @@ class Solution:
     #         return 0
     #     max_ = max(height)
     #     ans, index = self.get_area(max_=max_, height=height, ans=ans)
-    #     height = height[index:][::-1]
+    #     height = height[index:]
+    #     height.reverse()
     #     max_ += 1  # 避免凹字型題型被直接break掉, 如[2, 0, 2]
     #     ans, index = self.get_area(max_=max_, height=height, ans=ans)
     #     return ans
+
     def trap(self, height: List[int]) -> int:
         if not list:
             return 0
@@ -46,13 +48,13 @@ class Solution:
             left_max = max(h, left_max)
             left_list.append(left_max)
 
-        for h in height[::-1]:
+        for h in reversed(height):
             right_max = max(h, right_max)
             # right_list.insert(0, right_max)
             # 如果用insert則不用逆序, 但insert效能較差
             right_list.append(right_max)
 
-        right_list = right_list[::-1]
+        right_list.reverse()
         ans = 0
         for index, h in enumerate(height):
             left = left_list[index]
