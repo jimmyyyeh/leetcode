@@ -1,6 +1,6 @@
 class Solution:
     """
-    TODO:
+    TODO
     兩種解題思路
     1. two pointer 基本上會遇到下列的情形:
         a. 一對一的情形, 如 [abc, a?c], 則直接往後推進, 基本上沒問題
