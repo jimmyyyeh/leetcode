@@ -17,7 +17,7 @@ class Solution:
         #     head = head.next
         #
         # ans = None
-        # for index, value in enumerate(values[::-1]):
+        # for index, value in enumerate(reversed(values)):
         #     if index == n - 1:
         #         continue
         #     if not ans:
