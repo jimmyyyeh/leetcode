@@ -17,7 +17,7 @@ class Solution:
             if not matrix:
                 break
 
-            for m in matrix[::-1]:
+            for m in reversed(matrix):
                 ans.append(m.pop(0))
                 if not m:
                     matrix = matrix[:-1]
