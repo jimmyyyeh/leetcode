@@ -4,7 +4,7 @@ class Solution:
         thousands = int(num / 1000)
         num = num % 1000
         ans = []
-        for index, n in enumerate(str(num)[::-1]):
+        for index, n in enumerate(reversed(str(num))):
             n_num = int(n)
             quotient_char = roman_list[index * 2 + 1]
             reminder_char = roman_list[index * 2]
