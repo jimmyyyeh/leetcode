@@ -19,12 +19,12 @@ class Solution:
             for j in range(len_):
                 matrix[i][j] = position_dict[(j, i)]
 
-            matrix[i] = matrix[i][::-1]
+            matrix[i].reverse()
         return matrix
 
         # len_ = len(matrix)
         # for i in range(len_):
         #     for j in range(i, len_):
         #         matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
-        #     matrix[i] = matrix[i][::-1]
+        #     matrix[i].reverse()
         # return matrix
