@@ -2,7 +2,7 @@ class Solution:
     """
     TODO
     兩種解題思路:
-    1. Kadane’s Algorithm3
+    1. Kadane’s Algorithm
         如: [-2, 1, -3, 4, -1, 2, 1, -5, 4]
         起始最大(current_max) = 起始總和(current_sum) = -2 (nums[0])
         1 -> sum = (-2 + 1) = -1, num > current_sum -> current_sum = num = 1
