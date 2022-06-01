@@ -1,6 +1,6 @@
 class Solution:
     """
-    TODO:
+    TODO
     暴力解法概念:
     (往左找第一個<自己的個數 + 往右找第一個<自己的個數)為底, *本身為高
     -> 嚴格遞增的stack(Monotonic stack), 遇到破壞規則的元素pop出來做計算

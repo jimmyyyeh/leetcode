@@ -8,7 +8,7 @@ class Solution:
             如[abcdeabcdeabczz, *abczz], 要刪去的是哪一組abc之前的字串?
             因此當遇到*, 先緩存當前位置, 若走到沒辦法繼續往前時, 則回到s的緩存指標,
             接著向後推進一個位置(迫使s必須往後推進比對), p則回到緩存指標(即*)
-    2. DP 需要多理解, 參考下解:
+    2. dp 需要多理解, 參考下解:
         https://leetcode.com/problems/wildcard-matching/discuss/321724/
         邊界:
         a. dp[0][0] -> s = '', p = '' (兩者皆為空字串)
