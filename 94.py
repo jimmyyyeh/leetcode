@@ -23,6 +23,7 @@ class Solution:
     #     result = list()
     #     self.dfs(root=root, result=result)
     #     return result
+
     def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         result = list()
         stack = list()
