@@ -34,6 +34,7 @@ class Solution:
         while queue:
             level = []
             level_len = len(queue)
+            # cache住當前層級的長度, 新append進去的都是下一層級的node
             for _ in range(level_len):
                 node = queue.pop(0)
                 if node:
